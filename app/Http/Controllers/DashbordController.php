@@ -43,14 +43,14 @@ class DashbordController extends Controller
         todo: to do it in this way we should have fillable in the model
         ? for the second types of writings I will use this collor!
         ? $idea = new Idea([
-        ?    "content" => 'Test'
+        ?    "content" => 'Test',
         ?    "likest" => 10
         ? ]);
         // save it in database:
         $idea->save();
         
 
-        // to view the models from controller there are two ways:
+        // to view the models from controller there are 4 ways:
         1- var_dump(Idea::all());
         ? 2- dump(Idea::all());
         ! 3- dd(Idea::all());       this one will stop the other codes and just the dd will work
