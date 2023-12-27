@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailables\Content;
 
 class DashbordController extends Controller
 {
@@ -47,14 +48,22 @@ class DashbordController extends Controller
         ? ]);
         // save it in database:
         $idea->save();
-        */
-        $idea = new Idea([
-            "content" => 'Test',
-            "likest" => 10
-        ]);
-        // save it in database:
-        $idea->save();
+        
 
-        return view('dashboard');
+        // to view the models from controller there are two ways:
+        1- var_dump(Idea::all());
+        ? 2- dump(Idea::all());
+        ! 3- dd(Idea::all());       this one will stop the other codes and just the dd will work
+        * 4- ddd(Idea::all());      this one is dump die debug
+
+
+        // this is for getting all the models:
+        return view('dashboard', ['ideas' => Idea::all()]);
+        */
+
+        //we can give ordered by here:
+        return view('dashboard', [
+            'ideas' => Idea::orderBy('created_at', 'DESC')->get()
+        ]);
     }
 }
