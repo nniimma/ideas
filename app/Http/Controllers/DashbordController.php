@@ -44,7 +44,7 @@ class DashbordController extends Controller
         ? for the second types of writings I will use this collor!
         ? $idea = new Idea([
         ?    "content" => 'Test',
-        ?    "likest" => 10
+        ?    "likes" => 10
         ? ]);
         // save it in database:
         $idea->save();
