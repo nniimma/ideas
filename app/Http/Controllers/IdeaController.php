@@ -28,8 +28,11 @@ class IdeaController extends Controller
             ? "content" => request()->get('idea', ''),
             ? ]);
         */
-
-        // to not going to a blank page while using post method:
-        return redirect()->route('dashboard');
+        /*
+        ! to not going to a blank page while using post method: using redirect()->route()
+        ? sending one time session that is deleted after the user see it: with('key', 'message')
+        
+     */
+        return redirect()->route('dashboard')->with('success', 'Idea created successfully!');
     }
 }
