@@ -10,6 +10,7 @@ class IdeaController extends Controller
     public function store()
     {
 
+        // this is for validation of the form and the idea comes from name of the text area
         request()->validate([
             'idea' => 'required|min:3|max:240'
         ]);

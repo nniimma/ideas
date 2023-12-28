@@ -59,11 +59,16 @@ class DashbordController extends Controller
 
         // this is for getting all the models:
         return view('dashboard', ['ideas' => Idea::all()]);
-        */
 
         //we can give ordered by here:
         return view('dashboard', [
             'ideas' => Idea::orderBy('created_at', 'DESC')->get()
+        ]);
+        */
+
+        // by paginate we do the pagination, in () we have the number of each in one page:
+        return view('dashboard', [
+            'ideas' => Idea::orderBy('created_at', 'DESC')->paginate(3)
         ]);
     }
 }
