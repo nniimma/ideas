@@ -9,6 +9,11 @@ class IdeaController extends Controller
 {
     public function store()
     {
+
+        request()->validate([
+            'idea' => 'required|min:3|max:240'
+        ]);
+
         /* 
             * this is to get the token:
             * dump($_POST);
