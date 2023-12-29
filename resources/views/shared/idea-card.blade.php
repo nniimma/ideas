@@ -9,6 +9,15 @@
                         </a></h5>
                 </div>
             </div>
+            <div>
+                {{-- ! we need to pass an id to the rout not to get error: --}}
+                <form action="{{ route('idea.destroy', $idea->id) }}" method="post">
+                    {{-- ! on web request we can do just get and post request but in laravel we can show that is a delete request: --}}
+                    @method('delete')
+                    @csrf
+                    <button class="btn btn-danger btn-small">Delete</button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="card-body">

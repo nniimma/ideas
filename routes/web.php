@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DashbordController::class, 'getDashboard'])->name('dashboard');
-Route::post('/idea', [IdeaController::class, 'store'])->name('idea.create');
+Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
+// todo: inside {} is a variable and we can pass value to it
+Route::delete('/ideas/{id}', [IdeaController::class, 'destroy'])->name('idea.destroy');
 
 Route::get('/terms', function () {
     return view('terms');
