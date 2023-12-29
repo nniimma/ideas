@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class IdeaController extends Controller
 {
+    function show(Idea $idea)
+    {
+        // ? to shorten the code we can use compact('idea): return view('ideas.show', compact('idea'));
+        return view('ideas.show', ['idea' => $idea]);
+    }
+
     public function store()
     {
 
@@ -51,6 +57,15 @@ class IdeaController extends Controller
 
         // ! to delete:
         $idea->delete();
+
+        /*
+            ? amother way to delete using binding rout(the variable should be match in the web.php):
+            ? the way it works is it will find the primary key of the given database and then put it inside the given variable
+            ? function destroy(Idea $Idea){
+            ?   $idea->delete();
+            ?}
+        */
+
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully!');
     }
 }

@@ -15,7 +15,8 @@
                     {{-- ! on web request we can do just get and post request but in laravel we can show that is a delete request: --}}
                     @method('delete')
                     @csrf
-                    <button class="btn btn-danger btn-small">Delete</button>
+                    <a href="{{ route('ideas.show', $idea->id) }}">View</a>
+                    <button class="ms-1 btn btn-danger btn-small">Delete</button>
                 </form>
             </div>
         </div>
