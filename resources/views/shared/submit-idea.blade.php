@@ -7,7 +7,7 @@
     <form action="{{ url('/ideas') }}" method="post">
         @csrf {{-- ! this is for not getting the 419 error (page expired), it is a kind of security against csrf attacks --}}
         <div class="mb-3">
-            <textarea name="idea" class="form-control" id="idea" rows="3"></textarea>
+            <textarea name="content" class="form-control" id="content" rows="3"></textarea>
             {{-- ! to show error(the message is directly from laravel): --}}
             @error('idea')
                 <span class="d-block fs-6 text-danger">{{ $message }}</span>

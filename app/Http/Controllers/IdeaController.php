@@ -13,12 +13,31 @@ class IdeaController extends Controller
         return view('ideas.show', ['idea' => $idea]);
     }
 
+    function edit(Idea $idea)
+    {
+        $editing = true;
+
+        return view('ideas.show', ['idea' => $idea, 'editing' => $editing]);
+    }
+
+    function update(Idea $idea)
+    {
+        request()->validate([
+            'content' => 'required|min:3|max:240'
+        ]);
+
+        $idea->content = request()->get('content', '');
+        $idea->save();
+
+        return redirect()->route('dashboard')->with('success', 'Idea updated successfully!');
+    }
+
     public function store()
     {
 
         // this is for validation of the form and the idea comes from name of the text area
         request()->validate([
-            'idea' => 'required|min:3|max:240'
+            'content' => 'required|min:3|max:240'
         ]);
 
         /* 
@@ -30,7 +49,7 @@ class IdeaController extends Controller
             ! dump(request()->get('idea', 'null'));
         */
         $idea = new Idea([
-            "content" => request()->get('idea', 'null'),
+            "content" => request()->get('content', ''),
         ]);
 
         $idea->save();

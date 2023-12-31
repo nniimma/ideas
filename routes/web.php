@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashbordController::class, 'getDashboard'])->name('dashboard');
 Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
 Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->name('ideas.show');
+Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit'])->name('ideas.edit');
+Route::put('/ideas/{idea}', [IdeaController::class, 'update'])->name('ideas.update');
 // todo: inside {} is a variable and we can pass value to it
 // ? if we use the rout binding method, we should use the same variable given in the controller: in this case $idea, so: {idea} instead of {id}
 Route::delete('/ideas/{id}', [IdeaController::class, 'destroy'])->name('idea.destroy');
