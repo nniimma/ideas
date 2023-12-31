@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailables\Content;
 
 class DashbordController extends Controller
 {
-    function getDashboard()
+    function index()
     {
         /*
         $users = [
@@ -66,9 +66,19 @@ class DashbordController extends Controller
         ]);
         */
 
+        $ideas = Idea::orderBy('created_at', 'DESC');
+
+        // * searching codes:
+        // * at first we should check if there is anything to search for and then we should check the search value with the database:
+        if (request()->has('search')) {
+            // ! where('content you want to search for', 'operation--by default is [=]--', 'matching to');
+            // ! percents are for SQL syntax:
+            $ideas = $ideas->where('content', 'like', '%' . request()->get('search') . '%');
+        }
+
         // by paginate we do the pagination, in () we have the number of each in one page:
         return view('dashboard', [
-            'ideas' => Idea::orderBy('created_at', 'DESC')->paginate(3)
+            'ideas' => $ideas->paginate(3)
         ]);
     }
 }
