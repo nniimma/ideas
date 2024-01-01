@@ -9,6 +9,10 @@ class IdeaController extends Controller
 {
     function show(Idea $idea)
     {
+        /*
+            // it is to get all the comments:
+            dd($idea->comments);
+        */
         // ? to shorten the code we can use compact('idea): return view('ideas.show', compact('idea'));
         return view('ideas.show', ['idea' => $idea]);
     }

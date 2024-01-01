@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashbordController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\ProfileController;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DashbordController::class, 'index'])->name('dashboard');
+
+
 Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
 Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->name('ideas.show');
 Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit'])->name('ideas.edit');
@@ -24,6 +27,9 @@ Route::put('/ideas/{idea}', [IdeaController::class, 'update'])->name('ideas.upda
 // todo: inside {} is a variable and we can pass value to it
 // ? if we use the rout binding method, we should use the same variable given in the controller: in this case $idea, so: {idea} instead of {id}
 Route::delete('/ideas/{id}', [IdeaController::class, 'destroy'])->name('idea.destroy');
+
+
+Route::post('/ideas/{idea}/comments', [CommentController::class, 'store'])->name('ideas.comments.store');
 
 Route::get('/terms', function () {
     return view('terms');
