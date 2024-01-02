@@ -26,12 +26,22 @@ class IdeaController extends Controller
 
     function update(Idea $idea)
     {
-        request()->validate([
+        /*
+            request()->validate([
+                'content' => 'required|min:3|max:240'
+            ]);
+
+            $idea->content = request()->get('content', '');
+            $idea->save();
+        */
+
+        //? less code way to do update and get rid of security issues:
+        $validated =             request()->validate([
             'content' => 'required|min:3|max:240'
         ]);
 
-        $idea->content = request()->get('content', '');
-        $idea->save();
+        $idea->update($validated);
+        // ? untill here
 
         return redirect()->route('dashboard')->with('success', 'Idea updated successfully!');
     }
@@ -40,7 +50,7 @@ class IdeaController extends Controller
     {
 
         // this is for validation of the form and the idea comes from name of the text area
-        request()->validate([
+        $validated = request()->validate([
             'content' => 'required|min:3|max:240'
         ]);
 
@@ -51,12 +61,13 @@ class IdeaController extends Controller
             ! dump(request());
             ! this one is to get a special part of request, the idea inside the get comes from the name of the erea in html that we gave and the second parameter is the default one:
             ! dump(request()->get('idea', 'null'));
+            ! another way:
+            $idea = new Idea([
+                "content" => request()->get('content', ''),
+            ]);
+    
+            $idea->save();
         */
-        $idea = new Idea([
-            "content" => request()->get('content', ''),
-        ]);
-
-        $idea->save();
         /*
             ! another way of code above (this one needs fillable as well):
             ? $idea = Idea::create([
@@ -68,6 +79,9 @@ class IdeaController extends Controller
         ? sending one time session that is deleted after the user see it: with('key', 'message')
         
      */
+        // ! it is better to use validated ones for fillable, not to have security issues:
+        Idea::create($validated);
+
         return redirect()->route('dashboard')->with('success', 'Idea created successfully!');
     }
 

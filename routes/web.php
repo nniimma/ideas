@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashbordController;
 use App\Http\Controllers\IdeaController;
@@ -27,9 +28,10 @@ Route::put('/ideas/{idea}', [IdeaController::class, 'update'])->name('ideas.upda
 // todo: inside {} is a variable and we can pass value to it
 // ? if we use the rout binding method, we should use the same variable given in the controller: in this case $idea, so: {idea} instead of {id}
 Route::delete('/ideas/{id}', [IdeaController::class, 'destroy'])->name('idea.destroy');
-
-
 Route::post('/ideas/{idea}/comments', [CommentController::class, 'store'])->name('ideas.comments.store');
+
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'store']);
 
 Route::get('/terms', function () {
     return view('terms');
