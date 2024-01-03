@@ -12,12 +12,14 @@
             </div>
             <div>
                 {{-- ! we need to pass an id to the rout not to get error: --}}
-                <form action="{{ route('idea.destroy', $idea->id) }}" method="post">
+                <form action="{{ route('ideas.destroy', $idea->id) }}" method="post">
                     {{-- ! on web request we can do just get and post request but in laravel we can show that is a delete request: --}}
                     @method('delete')
                     @csrf
-                    <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
-                    <a class="ms-2" href="{{ route('ideas.show', $idea->id) }}">View</a>
+                    @auth
+                        <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
+                        <a class="ms-2" href="{{ route('ideas.show', $idea->id) }}">View</a>
+                    @endauth
                     <button class="ms-1 btn btn-danger btn-small">Delete</button>
                 </form>
             </div>

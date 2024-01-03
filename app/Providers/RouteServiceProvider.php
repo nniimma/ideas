@@ -35,6 +35,10 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            // ! if you want to register a new route file:
+            Route::middleware('web')
+                ->group(base_path('routes/auth.php'));
         });
     }
 }
