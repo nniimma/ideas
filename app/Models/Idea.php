@@ -16,7 +16,8 @@ class Idea extends Model
     */
     protected $fillable = [
         'content',
-        'likes'
+        'likes',
+        'user_id'
     ];
 
     // * oposite of fillable is guarded(it means I dont want mass assignment it):
@@ -32,5 +33,12 @@ class Idea extends Model
         // ! first parameter is the model, second one the foreignKey, and the third one is the local key
         // ! by default foreignKey in laravel is tableName_id and localKey is id
         return $this->hasMany(Comment::class, 'idea_id', 'id');
+    }
+
+    // ! a new relatioship to get the name of the user who put the comment:
+    function user()
+    {
+        // ! we use belongs to because many ideas can belond to one user:
+        return $this->belongsTo(User::class);
     }
 }

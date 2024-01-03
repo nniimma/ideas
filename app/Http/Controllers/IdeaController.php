@@ -19,6 +19,10 @@ class IdeaController extends Controller
 
     function edit(Idea $idea)
     {
+        if (auth()->id() !== $idea->user_id) {
+            abort(404, 'message you want!');
+        }
+
         $editing = true;
 
         return view('ideas.show', ['idea' => $idea, 'editing' => $editing]);
@@ -26,6 +30,10 @@ class IdeaController extends Controller
 
     function update(Idea $idea)
     {
+        if (auth()->id() !== $idea->user_id) {
+            abort(404, 'message you want!');
+        }
+
         /*
             request()->validate([
                 'content' => 'required|min:3|max:240'
@@ -53,6 +61,9 @@ class IdeaController extends Controller
         $validated = request()->validate([
             'content' => 'required|min:3|max:240'
         ]);
+
+        // ! auth()->id()  will give the user's id:
+        $validated['user_id'] = auth()->id();
 
         /* 
             * this is to get the token:
@@ -85,22 +96,25 @@ class IdeaController extends Controller
         return redirect()->route('dashboard')->with('success', 'Idea created successfully!');
     }
 
-    function destroy($id)
+    function destroy(Idea $idea)
     {
+        // ! check if the person who put the idea is the same as the one who logged in:
+        if (auth()->id() !== $idea->user_id) {
+            abort(404, 'message you want!');
+        }
+
         // dump is to check if the code is working:
         // todo: dump('deleting');
-        // ! we check if the id of the rout is the same in the database and we get the one that is the same and then put it inside a variable, if we use get it means there are many data to get from database, or fail is for the times that there is no data with the same id, so it will give a 404 responce:
-        $idea = Idea::where('id', $id)->firstOrFail();
 
-        // ! to delete:
         $idea->delete();
 
+
         /*
-            ? amother way to delete using binding rout(the variable should be match in the web.php):
-            ? the way it works is it will find the primary key of the given database and then put it inside the given variable
-            ? function destroy(Idea $Idea){
-            ?   $idea->delete();
-            ?}
+            ? another way to delete using binding rout(the variable should be match in the web.php):
+            ? we check if the id of the rout is the same in the database and we get the one that is the same and then put it inside a variable, if we use get it means there are many data to get from database, or fail is for the times that there is no data with the same id, so it will give a 404 responce:
+            ? $idea = Idea::where('id', $id)->firstOrFail();
+            ? to delete:
+            ? $idea->delete();
         */
 
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully!');

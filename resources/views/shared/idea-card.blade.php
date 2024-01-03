@@ -3,10 +3,11 @@
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <img style="width:50px" class="me-2 avatar-sm rounded-circle"
-                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
+                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $idea->user->name }}"
+                    alt="{{ $idea->user->name }}">
                 <div>
-                    <h5 class="card-title mb-0"><a href="#"> Mario
-                        </a></h5>
+                    {{-- ! we get the name from the relatiosship that we made in the user and idea models --}}
+                    <h5 class="card-title mb-0"><a href="#"> {{ $idea->user->name }}</a></h5>
                 </div>
             </div>
             <div>

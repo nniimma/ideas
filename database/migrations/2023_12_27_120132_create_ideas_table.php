@@ -18,6 +18,8 @@ return new class extends Migration
     {
         schema::create('ideas', function (Blueprint $table) {
             $table->id();
+            // ! constrained means it will just make idea for users that exists, cascadeOnDelete means if we delete the user, ideas of thet user will be deleted as well.
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('content');
             $table->unsignedBigInteger('likes')->default(0);
             $table->timestamps();

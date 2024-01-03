@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             // ! constrained() method is for not be able to make ids that doest exist
             // ! cascadeOnDelete() is to be delete when you delete the one in relation
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('idea_id')->constrained()->cascadeOnDelete();
             $table->string('content');
             $table->timestamps();
