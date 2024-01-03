@@ -24,8 +24,8 @@ Route::get('/', [DashbordController::class, 'index'])->name('dashboard');
 // ! as will help in prefix for route names in the group
 // ! we can have route groups inside routegroups
 Route::group(['prefix' => 'ideas', 'as' => 'ideas.', 'middleware' => ['auth']], function () {
-    Route::post('', [IdeaController::class, 'store'])->name('store')->withoutMiddleware(['auth']);
     Route::get('/{idea}', [IdeaController::class, 'show'])->name('show')->withoutMiddleware(['auth']);
+    Route::post('', [IdeaController::class, 'store'])->name('store');
     // ! this middleware see if the person is logged in or not, if he was not logged in it will send it to log in page: 
     Route::get('/{idea}/edit', [IdeaController::class, 'edit'])->name('edit');
     Route::put('/{idea}', [IdeaController::class, 'update'])->name('update');
@@ -33,6 +33,14 @@ Route::group(['prefix' => 'ideas', 'as' => 'ideas.', 'middleware' => ['auth']], 
     Route::delete('/{idea}', [IdeaController::class, 'destroy'])->name('destroy');
     Route::post('/{idea}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
+
+// ? another way to do all the routes above (index, create, store, show, edit, update, destroy):
+// ? if there are some methods that you do not use, you should use except:
+// ? we can give middleware as well and not giving middlewarware with only method:
+// todo: Route::resource('ideas', IdeaController::class)->except(['index', 'create'])->middleware('auth');
+// todo: Route::resource('ideas', IdeaController::class)->only(['show']);
+// ? this one is the same as the post comment above:
+// todo: Route::resource('ideas.comments', CommentController::class)->only(['store'])->middleware('auth');
 
 Route::get('/terms', function () {
     return view('terms');
