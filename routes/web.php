@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashbordController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,8 @@ Route::group(['prefix' => 'ideas', 'as' => 'ideas.', 'middleware' => ['auth']], 
 // todo: Route::resource('ideas', IdeaController::class)->only(['show']);
 // ? this one is the same as the post comment above:
 // todo: Route::resource('ideas.comments', CommentController::class)->only(['store'])->middleware('auth');
+
+Route::resource('users', UserController::class)->only(['show', 'edit', 'update'])->middleware('auth');
 
 Route::get('/terms', function () {
     return view('terms');
