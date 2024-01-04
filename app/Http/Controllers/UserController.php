@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -49,9 +50,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $editing = true;
         $ideas = $user->ideas()->paginate(3);
-        return view('users.show', compact('user', 'editing', 'ideas'));
+        return view('users.edit', compact('user', 'ideas'));
     }
 
     /*
@@ -59,7 +59,25 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
-        //
+        $validated = request()->validate([
+            'bio' => 'nullable|max:255',
+            'image' => 'image',
+            'name' => 'required'
+        ]);
+
+
+        if (request()->has('image')) {
+            // ! in store you will tell where you want to store the photo(default is in storage/app/public):
+            $imagePath = request()->file('image')->store('profile', 'public');
+            $validated['image'] = $imagePath;
+
+            // ! this is for when we upload a new photo, the old photo be deleted:
+            Storage::disk('public')->delete($user->image);
+        }
+
+        $user->update($validated);
+
+        return redirect()->route('users.show', $user->id)->with('success', 'Changes successfully saved.');
     }
 
     /*
@@ -70,4 +88,9 @@ class UserController extends Controller
         
     todo    }
     */
+
+    function profile()
+    {
+        return $this->show(auth()->user());
+    }
 }
