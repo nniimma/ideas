@@ -77,7 +77,8 @@ class UserController extends Controller
             // ! Check if there was an existing image and delete it
             if ($existingImagePath && Storage::disk('public')->exists($existingImagePath)) {
                 // ! this is for when we upload a new photo, the old photo be deleted:
-                Storage::disk('public')->delete($user->image);
+                // ! ?? '' it is for the times that the image is null:
+                Storage::disk('public')->delete($user->image ?? '');
             }
         }
 
@@ -90,7 +91,7 @@ class UserController extends Controller
     // !  Remove the specified resource from storage.
     function destroy(User $user)
     {
-        Storage::disk('public')->delete($user->image);
+        Storage::disk('public')->delete($user->image ?? '');
         $user->update(['image' => null]);
         return redirect()->route('users.show', $user->id)->with('success', 'Image successfully deleted!');
     }
