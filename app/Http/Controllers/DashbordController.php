@@ -66,6 +66,11 @@ class DashbordController extends Controller
         ]);
         */
 
+        /*
+            ! if you want to see the preview of your email that is sent when you creat a user:
+            todo: return new WelcomeEmail(auth()->user());
+        */
+
         $ideas = Idea::orderBy('created_at', 'DESC');
 
         // * searching codes:

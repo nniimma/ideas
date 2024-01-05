@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 // ! laravel jetstream is for more than one authentications
 class AuthController extends Controller
@@ -23,11 +25,14 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password'])
         ]);
+
+        // ! to send email after regestering a new user:
+        Mail::to($user->email)->send(new WelcomeEmail($user));
 
         return redirect()->route('dashboard')->with('success', 'User registered successfully.');
     }
