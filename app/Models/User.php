@@ -55,6 +55,25 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    function followings()
+    {
+        // ! belongs to many is for many to many relationsships
+        // ! follower_user is our pivot table || pivot table is a table that save data of other tables inside it:
+        // ! foreignPivotKey means us and relatedPivotKey is the one that we follow
+        return $this->belongsToMany(User::class, 'follower_user', 'follower_id', 'user_id')->withTimestamps();
+    }
+
+    function followers()
+    {
+        return $this->belongsToMany(User::class, 'follower_user', 'user_id', 'follower_id')->withTimestamps();
+    }
+
+    // ! this function is to define if we follewed the user or not:
+    function follows(User $user)
+    {
+        return $this->followings()->where('user_id', $user->id)->exists();
+    }
+
     function getImageURL()
     {
         if ($this->image) {
