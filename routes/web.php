@@ -43,7 +43,7 @@ Route::group(['prefix' => 'ideas', 'as' => 'ideas.', 'middleware' => ['auth']], 
 // ? this one is the same as the post comment above:
 // todo: Route::resource('ideas.comments', CommentController::class)->only(['store'])->middleware('auth');
 
-Route::resource('users', UserController::class)->only(['show', 'edit', 'update'])->middleware('auth');
+Route::resource('users', UserController::class)->only(['show', 'edit', 'update', 'destroy'])->middleware('auth');
 
 Route::get('profile', [UserController::class, 'profile'])->middleware('auth')->name('profile');
 

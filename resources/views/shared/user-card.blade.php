@@ -17,10 +17,6 @@
                 @endauth
             </div>
         </div>
-        <div class="mt-4">
-            <label for="image">Profile Picture</label>
-            <input class="form-control" name="image" type="file" id="image">
-        </div>
         <div class="px-2 mt-4">
             <h5 class="fs-5"> Bio : </h5>
             <p class="fs-6 fw-light">

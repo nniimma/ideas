@@ -67,12 +67,18 @@ class UserController extends Controller
 
 
         if (request()->has('image')) {
+            // ! Get the existing image path
+            $existingImagePath = $user->image;
+
             // ! in store you will tell where you want to store the photo(default is in storage/app/public):
             $imagePath = request()->file('image')->store('profile', 'public');
             $validated['image'] = $imagePath;
 
-            // ! this is for when we upload a new photo, the old photo be deleted:
-            Storage::disk('public')->delete($user->image);
+            // ! Check if there was an existing image and delete it
+            if ($existingImagePath && Storage::disk('public')->exists($existingImagePath)) {
+                // ! this is for when we upload a new photo, the old photo be deleted:
+                Storage::disk('public')->delete($user->image);
+            }
         }
 
         $user->update($validated);
@@ -80,14 +86,15 @@ class UserController extends Controller
         return redirect()->route('users.show', $user->id)->with('success', 'Changes successfully saved.');
     }
 
-    /*
-    !  Remove the specified resource from storage.
-     
-    todo  function destroy(string $id)
-    todo    {
-        
-    todo    }
-    */
+
+    // !  Remove the specified resource from storage.
+    function destroy(User $user)
+    {
+        Storage::disk('public')->delete($user->image);
+        $user->update(['image' => null]);
+        return redirect()->route('users.show', $user->id)->with('success', 'Image successfully deleted!');
+    }
+
 
     function profile()
     {
