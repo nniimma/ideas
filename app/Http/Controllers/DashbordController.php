@@ -71,6 +71,14 @@ class DashbordController extends Controller
             todo: return new WelcomeEmail(auth()->user());
         */
 
+        // ! with is for eager load: we pass a single query to get all the users and the comments
+        // ! to use comments.user, we should have relationship of users in comments model
+        // ? we can do the same thing in the model as well...
+        // ! if we dont want to use the relationships here we can use without() method...
+        // todo: $ideas = Idea::with('user', 'comments.user')->orderBy('created_at', 'DESC');
+        // todo: $ideas = Idea::without('user')->orderBy('created_at', 'DESC');
+
+
         $ideas = Idea::orderBy('created_at', 'DESC');
 
         // * searching codes:
