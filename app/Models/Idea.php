@@ -21,7 +21,6 @@ class Idea extends Model
     */
     protected $fillable = [
         'content',
-        'likes',
         'user_id'
     ];
 
@@ -45,5 +44,11 @@ class Idea extends Model
     {
         // ! we use belongs to because many ideas can belond to one user:
         return $this->belongsTo(User::class);
+    }
+
+    // ! if the pivot table was idea_user we wouldnt have to mention the table name but now that the pivot table's name is different we need to mention the table
+    function likes()
+    {
+        return $this->belongsToMany(User::class, 'idea_like')->withTimestamps();
     }
 }

@@ -68,6 +68,16 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'follower_user', 'user_id', 'follower_id')->withTimestamps();
     }
 
+    function likes()
+    {
+        return $this->belongsToMany(Idea::class, 'idea_like')->withTimestamps();
+    }
+    // ! this function is to define if we like a post or not:
+    function likesIdea(Idea $idea)
+    {
+        return $this->likes()->where('idea_id', $idea->id)->exists();
+    }
+
     // ! this function is to define if we follewed the user or not:
     function follows(User $user)
     {

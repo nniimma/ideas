@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class FollowerController extends Controller
 {
-    function follow(User $user)
+    function store(User $user)
     {
         // ! follower is the user that is logged in:
         $follower = auth()->user();
@@ -18,7 +18,7 @@ class FollowerController extends Controller
         return redirect()->route('users.show', $user->id)->with('success', 'Followed successfully!');
     }
 
-    function unfollow(User $user)
+    function distroy(User $user)
     {
         $follower = auth()->user();
 
