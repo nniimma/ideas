@@ -50,9 +50,13 @@
             @include('ideas.shared.like-button')
             <div>
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
-                    {{ $idea->created_at }} </span>
+                    {{-- ! toDateString helps to just show the day and not the hour --}}
+                    {{-- ! the name of all these methods are laravel carbon: --}}
+                    {{-- ! {{ $idea->created_at->toDateString() }} </span> --}}
+                    {{-- ! diffForHumans() will show how long ago, the post was created: --}}
+                    {{ $idea->created_at->diffForHumans() }} </span>
             </div>
         </div>
-        @include('shared.comments-box')
+        @include('ideas.shared.comments-box')
     </div>
 </div>

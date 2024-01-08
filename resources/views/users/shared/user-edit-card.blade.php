@@ -44,7 +44,7 @@
                     <span class="d-block fs-6 text-danger">{{ $message }}</span>
                 @enderror
             </div>
-            <button class="mb-3 btn btn-dark btn-sm">Save</button>
+            <button class="mb-3 btn btn-success btn-sm">Save</button>
             @include('users.shared.user-stats')
         </div>
         </form>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashbordController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\IdeaLikeController;
@@ -55,6 +56,9 @@ Route::post('users/{user}/unfollow', [FollowerController::class, 'distroy'])->mi
 
 Route::post('ideas/{idea}/like', [IdeaLikeController::class, 'store'])->middleware('auth')->name('ideas.like');
 Route::post('ideas/{idea}/unlike', [IdeaLikeController::class, 'distroy'])->middleware('auth')->name('ideas.unlike');
+
+// ! because invokbale controller just do one action, we do not need do mention the method name:
+Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 
 Route::get('/terms', function () {
     return view('terms');
