@@ -22,6 +22,13 @@
                 @endguest
                 {{-- ! auth means if just the user is loged in show the content inside --}}
                 @auth
+                    {{-- ! if the logged in user is admin show this: --}}
+                    @if (Auth::user()->is_admin)
+                        <li class="nav-item">
+                            <a class="{{ Route::is('admin.dashboard') ? 'active' : '' }} nav-link"
+                                href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         {{-- ! to acces the user's information on laravel we can use Auth class --}}
                         <a class="{{ Route::is('profile') ? 'active' : '' }} nav-link"

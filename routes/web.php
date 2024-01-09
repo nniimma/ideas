@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashbordController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaController;
@@ -59,6 +60,9 @@ Route::post('ideas/{idea}/unlike', [IdeaLikeController::class, 'distroy'])->midd
 
 // ! because invokbale controller just do one action, we do not need do mention the method name:
 Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
+
+// ! to pass more than one middleware you can put it inside an array:
+Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'admin']);
 
 Route::get('/terms', function () {
     return view('terms');
