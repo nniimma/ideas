@@ -62,7 +62,12 @@ Route::post('ideas/{idea}/unlike', [IdeaLikeController::class, 'distroy'])->midd
 Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 
 // ! to pass more than one middleware you can put it inside an array:
-Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'admin']);
+// ? first way to give role base functions:
+// todo: Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'admin']);
+// ? second way to give role base functions by using gate in the controller:
+// todo: Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth');
+// ? third way to give role base functions by using can middleware, inside can we must give a gate name:
+Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'can:admin']);
 
 Route::get('/terms', function () {
     return view('terms');

@@ -1,4 +1,4 @@
-<div class="card">
+aa<div class="card">
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
@@ -11,17 +11,19 @@
                 </div>
             </div>
             <div>
-                {{-- ! we need to pass an id to the rout not to get error: --}}
                 <form action="{{ route('ideas.destroy', $idea->id) }}" method="post">
-                    {{-- ! on web request we can do just get and post request but in laravel we can show that is a delete request: --}}
-                    @method('delete')
-                    @csrf
+                    <a class="ms-2" href="{{ route('ideas.show', $idea->id) }}">View</a>
                     @auth
-                        <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
-                        <a class="ms-2" href="{{ route('ideas.show', $idea->id) }}">View</a>
-                    @endauth
-                    <button class="ms-1 btn btn-danger btn-small">Delete</button>
-                </form>
+                        @can('idea.delete', $idea)
+                            {{-- ! we need to pass an id to the rout not to get error: --}}
+                            <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>
+                            {{-- ! on web request we can do just get and post request but in laravel we can show that is a delete request: --}}
+                            @method('delete')
+                            @csrf
+                            <button class="ms-1 btn btn-danger btn-small">Delete</button>
+                        </form>
+                    @endcan
+                @endauth
             </div>
         </div>
     </div>

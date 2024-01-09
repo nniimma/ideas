@@ -53,7 +53,8 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
-        'admin' => \App\Http\Middleware\ENsureUserIsAdmin::class,
+        // ? first way to define role base functions:
+        // todo: 'admin' => \App\Http\Middleware\ENsureUserIsAdmin::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,

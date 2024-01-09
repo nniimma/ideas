@@ -19,9 +19,14 @@ class IdeaController extends Controller
 
     function edit(Idea $idea)
     {
-        if (auth()->id() !== $idea->user_id) {
-            abort(404, 'message you want!');
-        }
+        // ? if the user is owner of the idea be able to edit it(first solution):
+        // todo: if (auth()->id() !== $idea->user_id) {
+        // todo:     abort(404, 'message you want!');
+        // todo: }
+
+        // ? if the user is owner of the idea be able to edit it(second solution: using gates):
+        $this->authorize('idea.edit', $idea);
+
 
         $editing = true;
 
@@ -30,9 +35,13 @@ class IdeaController extends Controller
 
     function update(Idea $idea)
     {
-        if (auth()->id() !== $idea->user_id) {
-            abort(404, 'message you want!');
-        }
+        // ? if the user is owner of the idea be able to edit it(first solution):
+        // todo: if (auth()->id() !== $idea->user_id) {
+        // todo:     abort(404, 'message you want!');
+        // todo: }
+
+        // ? if the user is owner of the idea be able to edit it(second solution: using gates):
+        $this->authorize('idea.edit', $idea);
 
         /*
             request()->validate([
@@ -99,9 +108,14 @@ class IdeaController extends Controller
     function destroy(Idea $idea)
     {
         // ! check if the person who put the idea is the same as the one who logged in:
-        if (auth()->id() !== $idea->user_id) {
-            abort(404, 'message you want!');
-        }
+        // ? if the user is owner of the idea be able to delete it(first solution):
+        // todo: if (auth()->id() !== $idea->user_id) {
+        // todo:     abort(404, 'message you want!');
+        // todo: }
+
+        // ? if the user is owner of the idea be able to delete it(second solution: using gates):
+        $this->authorize('idea.edit', $idea);
+
 
         // dump is to check if the code is working:
         // todo: dump('deleting');
