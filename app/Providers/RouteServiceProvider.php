@@ -17,7 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    // ! guest middleware will automatically send you to home page, so if the home page is not like this(/home) we should define it here:
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

@@ -25,7 +25,11 @@ class IdeaController extends Controller
         // todo: }
 
         // ? if the user is owner of the idea be able to edit it(second solution: using gates):
-        $this->authorize('idea.edit', $idea);
+        // todo: $this->authorize('idea.edit', $idea);
+
+        // ? doing the same thing that gates do with policies:
+        // ! update is the method we used in policies:
+        $this->authorize('update', $idea);
 
 
         $editing = true;
@@ -41,7 +45,11 @@ class IdeaController extends Controller
         // todo: }
 
         // ? if the user is owner of the idea be able to edit it(second solution: using gates):
-        $this->authorize('idea.edit', $idea);
+        // todo: $this->authorize('idea.edit', $idea);
+
+        // ? doing the same thing that gates do with policies:
+        // ! update is the method we used in policies:
+        $this->authorize('update', $idea);
 
         /*
             request()->validate([
@@ -114,7 +122,11 @@ class IdeaController extends Controller
         // todo: }
 
         // ? if the user is owner of the idea be able to delete it(second solution: using gates):
-        $this->authorize('idea.edit', $idea);
+        // todo: $this->authorize('idea.edit', $idea);
+
+        // ? doing the same thing that gates do with policies:
+        // ! update is the method we used in policies:
+        $this->authorize('update', $idea);
 
 
         // dump is to check if the code is working:
