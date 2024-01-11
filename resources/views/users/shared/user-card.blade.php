@@ -25,6 +25,10 @@
             @include('users.shared.user-stats')
             <div class="mt-3">
                 @auth
+                    {{-- ? other ways to do the if statement down:
+                     todo: @if (!Auth::user()->is($user))
+                     todo: @if (Auth::user()->isNot($user))
+                      --}}
                     @if (Auth::id() !== $user->id)
                         @if (Auth::user()->follows($user))
                             <form action="{{ route('users.unfollow', $user->id) }}" method="post">

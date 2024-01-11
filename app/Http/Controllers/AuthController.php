@@ -28,6 +28,8 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
+            // ! if we dont use the Hash laravel will hash it automatically(the automatic process is in user model):
+            // todo: 'password' =>$validated['password']
             'password' => Hash::make($validated['password'])
         ]);
 

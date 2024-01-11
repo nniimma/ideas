@@ -1,4 +1,4 @@
-aa<div class="card">
+<div class="card">
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
@@ -17,6 +17,7 @@ aa<div class="card">
                         {{-- ! idea edit is for gate --}}
                         {{-- todo: @can('idea.delete', $idea) --}}
                         {{-- ! update is for policy: --}}
+                        {{-- ! can check if the user is logged in or not and if he is not logged in it wont show the things inside: --}}
                         @can('update', $idea)
                             {{-- ! we need to pass an id to the rout not to get error: --}}
                             <a href="{{ route('ideas.edit', $idea->id) }}">Edit</a>

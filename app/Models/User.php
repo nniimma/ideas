@@ -35,9 +35,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
+    /*
      * The attributes that should be cast.
-     *
+     ! here hashes the pass:
      * @var array<string, string>
      */
     protected $casts = [
