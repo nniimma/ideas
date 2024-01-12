@@ -8,7 +8,7 @@
             {{-- ! value is for when we search and go to next page still having the search on the search bar --}}
             <input value="{{ request('search', '') }}" placeholder="..." name="search" class="form-control w-100"
                 type="text">
-            <button type="submit" class="btn btn-dark mt-2"> Search</button>
+            <button type="submit" class="btn btn-primary mt-2"> Search</button>
         </form>
     </div>
 </div>

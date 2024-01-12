@@ -44,7 +44,7 @@
                     @enderror
                 </div>
                 <div class="">
-                    <button type="submit" class="btn btn-dark mb-2 btn-sm"> Update </button>
+                    <button type="submit" class="btn btn-success mb-2 btn-sm"> Update </button>
                 </div>
             </form>
         @else
@@ -52,15 +52,18 @@
                 {{ $idea->content }}
             </p>
         @endif
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between mb-2">
             @include('ideas.shared.like-button')
             <div>
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
-                    {{-- ! toDateString helps to just show the day and not the hour --}}
-                    {{-- ! the name of all these methods are laravel carbon: --}}
-                    {{-- ! {{ $idea->created_at->toDateString() }} </span> --}}
-                    {{-- ! diffForHumans() will show how long ago, the post was created: --}}
-                    {{ $idea->created_at->diffForHumans() }} </span>
+                    {{-- 
+                     ! toDateString helps to just show the day and not the hour 
+                     ! the name of all these methods are laravel carbon: 
+                     ! {{ $idea->created_at->toDateString() }} 
+                     ! diffForHumans() will show how long ago, the post was created: 
+                     --}}
+                    {{ $idea->created_at->diffForHumans() }}
+                </span>
             </div>
         </div>
         @include('ideas.shared.comments-box')

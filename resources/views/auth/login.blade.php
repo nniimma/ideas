@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label for="remember-me" class=""></label><br>
-                    <input type="submit" name="submit" class="btn btn-dark btn-md" value="submit">
+                    <input type="submit" name="submit" class="btn btn-primary btn-md" value="submit">
                 </div>
                 <div class="text-right mt-2">
                     <a href="{{ route('register') }}" class="">Register here</a>

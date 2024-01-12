@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\Idea;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -59,24 +60,33 @@ class UserController extends Controller
 
     /*
      ! Update the specified resource in storage.
+     ! laravel first perform the validation and if the validation get false it wont perform the update method (if we use the form request:)
      */
-    public function update(User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $this->authorize('user.edit', $user->id);
+        // ! if you put authorize true in the form request we should have line downside:
+        // todo: $this->authorize('user.edit', $user->id);
 
-        $validated = request()->validate([
-            'bio' => 'nullable|max:255',
-            'image' => 'image',
-            'name' => 'required'
-        ]);
+        // ? first way to do the validations
+        // todo: $validated = request()->validate([
+        // todo:     'bio' => 'nullable|max:255',
+        // todo:     'image' => 'image',
+        // todo:     'name' => 'required'
+        // todo: ]);
 
+        // ? second way to do the validations form app/http/request/user/form request file:
+        $validated = $request->validated();
 
-        if (request()->has('image')) {
+        // ? this is the first method:
+        // todo: if (request()->has('image')) {
+        if ($request->has('image')) {
             // ! Get the existing image path
             $existingImagePath = $user->image;
 
             // ! in store you will tell where you want to store the photo(default is in storage/app/public):
-            $imagePath = request()->file('image')->store('profile', 'public');
+            // ? first method:
+            // todo: $imagePath = request()->file('image')->store('profile', 'public');
+            $imagePath = $request->file('image')->store('profile', 'public');
             $validated['image'] = $imagePath;
 
             // ! Check if there was an existing image and delete it

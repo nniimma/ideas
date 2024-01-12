@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateIdeaRequest;
+use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 
@@ -37,7 +39,7 @@ class IdeaController extends Controller
         return view('ideas.show', ['idea' => $idea, 'editing' => $editing]);
     }
 
-    function update(Idea $idea)
+    function update(UpdateIdeaRequest $request, Idea $idea)
     {
         // ? if the user is owner of the idea be able to edit it(first solution):
         // todo: if (auth()->id() !== $idea->user_id) {
@@ -61,9 +63,13 @@ class IdeaController extends Controller
         */
 
         //? less code way to do update and get rid of security issues:
-        $validated =             request()->validate([
-            'content' => 'required|min:3|max:240'
-        ]);
+        // ? first way of doing the validation:
+        // todo: $validated =             request()->validate([
+        // todo:     'content' => 'required|min:3|max:240'
+        // todo: ]);
+
+        // ? second way of doing the validation:
+        $validated = $request->validated();
 
         $idea->update($validated);
         // ? untill here
@@ -71,13 +77,17 @@ class IdeaController extends Controller
         return redirect()->route('dashboard')->with('success', 'Idea updated successfully!');
     }
 
-    public function store()
+    public function store(CreateIdeaRequest $request)
     {
 
         // this is for validation of the form and the idea comes from name of the text area
-        $validated = request()->validate([
-            'content' => 'required|min:3|max:240'
-        ]);
+        // ? first way of doing the validation:
+        // todo: $validated = request()->validate([
+        // todo:     'content' => 'required|min:3|max:240'
+        // todo: ]);
+
+        // ? second way of doing the validation:
+        $validated = $request->validated();
 
         // ! auth()->id()  will give the user's id:
         $validated['user_id'] = auth()->id();
