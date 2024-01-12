@@ -14,6 +14,8 @@ class Idea extends Model
     // ! we can choose the columns that we want as well(without space between id and name):
     protected $with = ['user:id,name,image', 'comments.user:id,name,image'];
 
+    protected $withCount = ['likes'];
+
     /*
     // the fillable is for being able to put the new values in the variable in the second method in dashboard controller (mass assigning and it has security problems)
     // to get rid of security issues it is better to only mass assign the ones that is validated

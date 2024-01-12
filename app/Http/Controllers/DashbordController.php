@@ -78,8 +78,12 @@ class DashbordController extends Controller
         // todo: $ideas = Idea::with('user', 'comments.user')->orderBy('created_at', 'DESC');
         // todo: $ideas = Idea::without('user')->orderBy('created_at', 'DESC');
 
-
+        // ! the withCount() is to count the data and will works with the relationships of the models:
+        // ! we can use withCount() here but it is better to use it in model:
+        // todo: $ideas = Idea::withCount('likes')->orderBy('created_at', 'DESC');
         $ideas = Idea::orderBy('created_at', 'DESC');
+        // ! if we want to load multiple relationships:
+        // todo: $ideas = Idea::withCount(['likes', 'comments'])->orderBy('created_at', 'DESC');
 
         // * searching codes:
         // * at first we should check if there is anything to search for and then we should check the search value with the database:
