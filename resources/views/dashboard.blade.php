@@ -1,5 +1,8 @@
 @extends('layout.layout')
 
+{{-- ! to give title to each page: --}}
+{{-- ! @section('title', 'Dashboard') =  @section('title') Dashboard @endsection --}}
+@section('title', 'Dashboard')
 @section('content')
     <div class="row">
         <div class="col-3">

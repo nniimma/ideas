@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name') }}</title>
+    {{-- ! we can use yield to give different names to title according to the page: --}}
+    <title> @yield('title') | {{ config('app.name') }}</title>
     {{-- another way of top code: 
     <title>{{ env('APP_NAME') }}</title> --}}
 
