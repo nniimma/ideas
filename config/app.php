@@ -83,6 +83,8 @@ return [
     |
     */
 
+    // ! here we define the default language:
+    // ! package and libraries that have translation, it will translate it automatically:
     'locale' => 'en',
 
     /*
@@ -96,6 +98,7 @@ return [
     |
     */
 
+    // ! here is bavkup language, if it could't translate to default language, it will translate to backup language:
     'fallback_locale' => 'en',
 
     /*

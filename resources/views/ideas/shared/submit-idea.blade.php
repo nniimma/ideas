@@ -16,12 +16,15 @@
             </div>
             <div class="">
                 {{-- ! type="submit" in html 5 is not necessary --}}
-                <button type="submit" class="btn btn-dark"> Share </button>
+                <button type="submit" class="btn btn-success"> Share </button>
             </div>
         </form>
     </div>
 @endauth
 
 @guest
-    <h4>Login to share your ideas</h4>
+    {{-- ! the function helper to bring the language line: {{ __('fileName.Key') }} --}}
+    <h4>{{ __('dashboard.login_to_share') }}</h4>
+    {{-- ? another function helper to bring the language line: @lang('fileName.Key') --}}
+    {{-- ? another function helper to bring the language line: {{ trans('fileName.Key') }} --}}
 @endguest
