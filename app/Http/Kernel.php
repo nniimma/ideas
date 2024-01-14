@@ -25,6 +25,7 @@ class Kernel extends HttpKernel
 
     /**
      ! The application's route middleware groups.
+     ! automatically will be configered with any route with web or api:
      *
      * @var array<string, array<int, class-string|string>>
      */
@@ -36,6 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\SetLocale::class,
         ],
 
         'api' => [

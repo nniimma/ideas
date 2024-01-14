@@ -69,6 +69,18 @@ Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
 // ? third way to give role base functions by using can middleware, inside can we must give a gate name:
 Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'can:admin']);
 
+// ! here is for different languages:
+Route::get('lang/{lang}', function ($lang) {
+    app()->setLocale($lang);
+    // ! for saving or preserving the locale over multiple request, we need to store it in our sessions:
+    // * Cookies are client-side files on a local computer that hold user information. Sessions are server-side files that contain user data. Cookies end on the lifetime set by the user. When the user quits the browser or logs out of the programmed, the session is over.
+    session()->put('locale', $lang);
+
+    // todo: dd(app()->getLocale());
+
+    return redirect()->route('dashboard');
+})->name('lang');
+
 Route::get('/terms', function () {
     return view('terms');
 });

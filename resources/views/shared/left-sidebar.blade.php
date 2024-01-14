@@ -20,8 +20,26 @@
             </li>
         </ul>
     </div>
-    <div class="{{ Route::is('profile') ? 'bg-primary rounded' : '' }} card-footer text-center py-2">
-        <a class="{{ Route::is('profile') ? 'text-white' : '' }} btn btn-link btn-sm" href="{{ route('profile') }}">View
-            Profile </a>
+    <div class="card-footer text-center py-2 flags">
+        <a class="{{ Route::is('lang') ? 'text-white' : '' }} btn btn-link btn-sm" href="{{ route('lang', 'en') }}">
+            <img src="{{ URL::asset('images/flags/USA.png') }}" alt="">
+            En
+        </a>
+        <a class="{{ Route::is('lang') ? 'text-white' : '' }} btn btn-link btn-sm" href="{{ route('lang', 'pt') }}">
+            <img src="{{ URL::asset('images/flags/brazil.png') }}" alt="">
+            Pt
+        </a>
+        <a class="{{ Route::is('lang') ? 'text-white' : '' }} btn btn-link btn-sm" href="{{ route('lang', 'fa') }}">
+            <img src="{{ URL::asset('images/flags/iran.png') }}" alt="">
+            Fa
+        </a>
+        <a class="{{ Route::is('lang') ? 'text-white' : '' }} btn btn-link btn-sm" href="{{ route('lang', 'de') }}">
+            <img src="{{ URL::asset('images/flags/german.png') }}" alt="">
+            De
+        </a>
+        <a class="{{ Route::is('lang') ? 'text-white' : '' }} btn btn-link btn-sm" href="{{ route('lang', 'tr') }}">
+            <img src="{{ URL::asset('images/flags/turkey.png') }}" alt="">
+            Tr
+        </a>
     </div>
 </div>
