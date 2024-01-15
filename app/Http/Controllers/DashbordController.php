@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Idea;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailables\Content;
 
@@ -93,9 +94,17 @@ class DashbordController extends Controller
             $ideas = $ideas->where('content', 'like', '%' . request()->get('search') . '%');
         }
 
+        // ! inside withCount we should write the relationship that we gave in user model:
+        // ! countWith will count all the ideas and automatically add it to: ideas_count
+        // ! it is better to send this variable globally to be able to use it in all our blade files(in app service provider):
+        // todo: $topUsers = User::withCount('ideas')->orderBy('ideas_count', 'DESC')->limit(5)->get();
+        // ? same code above
+        // todo: $topUsers = User::withCount('ideas')->orderBy('ideas_count', 'DESC')->take(5)->get();
+
         // by paginate we do the pagination, in () we have the number of each in one page:
         return view('dashboard', [
-            'ideas' => $ideas->paginate(3)
+            'ideas' => $ideas->paginate(3),
+            // todo(if we do not do it globally): 'topUsers' => $topUsers
         ]);
     }
 }
