@@ -13,10 +13,10 @@ class UpdateUserRequest extends FormRequest
     public function authorize(): bool
     {
         // ? if we do the autorize in controller:
-        // todo: return true;
+        return true;
         // ? if not:
         // ! first user is the logged in user and second one is the route binding model:
-        return $this->user()->can('update', $this->user);
+        // todo: return $this->user()->can('update', $this->user);
     }
 
     /*

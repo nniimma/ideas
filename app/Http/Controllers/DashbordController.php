@@ -91,8 +91,17 @@ class DashbordController extends Controller
         if (request()->has('search')) {
             // ! where('content you want to search for', 'operation--by default is [=]--', 'matching to');
             // ! percents are for SQL syntax:
-            $ideas = $ideas->where('content', 'like', '%' . request()->get('search') . '%');
+            // ? first way of doing search:
+            // todo: $ideas = $ideas->where('content', 'like', '%' . request()->get('search') . '%');
+            // ? the code abobe with scope that is written in idea controller
+            // ! search is coming from scopeSearch, we do not need the scope when we use the method:
+            $ideas = $ideas->search(request('search', ''));
         }
+
+        // ? shorter form of if code above(in this case no need of the code above if statement as well):
+        // todo: $ideas = Idea::when(request()->has('search'), function ($query) {
+        // todo:     $query->search(request('search', ''));
+        // todo: })->orderBy('created_at', 'DESC')->paginate(5);
 
         // ! inside withCount we should write the relationship that we gave in user model:
         // ! countWith will count all the ideas and automatically add it to: ideas_count

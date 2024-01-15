@@ -23,7 +23,11 @@ class FeedController extends Controller
         $ideas = Idea::whereIn('user_id', $followingIDs)->latest();
 
         if (request()->has('search')) {
-            $ideas = $ideas->where('content', 'like', '%' . request()->get('search') . '%');
+            // ? first way of doing search:
+            // todo: $ideas = $ideas->where('content', 'like', '%' . request()->get('search') . '%');
+            // ? the code abobe with scope that is written in idea controller
+            // ! search is coming from scopeSearch, we do not need the scope when we use the method:
+            $ideas = $ideas->search(request('search', ''));
         }
 
         return view('dashboard', [

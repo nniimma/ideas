@@ -65,7 +65,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         // ! if you put authorize true in the form request we should have line downside:
-        // todo: $this->authorize('user.edit', $user->id);
+        $this->authorize('user.edit', $user->id);
 
         // ? first way to do the validations
         // todo: $validated = request()->validate([

@@ -53,4 +53,12 @@ class Idea extends Model
     {
         return $this->belongsToMany(User::class, 'idea_like')->withTimestamps();
     }
+
+    // ! this is a local scope that is used just for a single model, we have global scope as well that we can use them in different models
+    // ! scopes: is a method that apply some sort of query on existing query:
+    // ! query helps us to use methods available:
+    function scopeSearch($query, $search = '')
+    {
+        $query->where('content', 'like', '%' . $search . '%');
+    }
 }
